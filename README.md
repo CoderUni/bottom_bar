@@ -15,7 +15,7 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^1.0.0
+  bottom_bar: ^1.0.0+1
 ```
 
 # Parameters
@@ -23,21 +23,21 @@ dependencies:
 ## BottomBar
 #### Creates a `BottomBar` that displays a list of [BottomBarItem](###BottomBarItem)
 
--  selectedIndex - Index of selected item
--  curve - Curve of animation
--  duration - Duration of animation
--  items - List of [BottomBarItem](###BottomBarItem) to display
--  itemPadding - `Padding` between the background color and (`Row` that contains icon and title)
--  onTap - Fires whenever a `BottomBarItem` is tapped
--  textStyle - `TextStyle` of `title` widget (Only applied when widget is `Text`)
+-  `selectedIndex` - `Index` of selected item
+-  `curve` - `Curve` of animation
+-  `duration` - `Duration` of animation
+-  `items` - List of [BottomBarItem](###BottomBarItem) to display
+-  `itemPadding` - `Padding` between the background color and (`Row` that contains icon and title)
+-  `onTap` - Fires whenever a `BottomBarItem` is tapped
+-  `textStyle` - `TextStyle` of `title` widget (Only applied when widget is `Text`)
 
  
 ## BottomBarItem
 #### Contains information about the item that [BottomBar](###BottomBar) has to display
--  icon - Icon of `BottomBarItem`
--  title - Title of `BottomBarItem`
--  activeColor - Color of `icon`, `title`, and `background` of `BottomBarItem` when it is selected
--  inactiveColor - Color of `icon`, `title`, and `background` of `BottomBarItem` when it is **not** selected
+-  `icon` - `Icon` of `BottomBarItem`
+-  `title` - `Title` of `BottomBarItem`
+-  `activeColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` when it is selected
+-  `inactiveColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` when it is **not** selected
 
 # Usage
 
