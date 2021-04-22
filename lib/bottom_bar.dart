@@ -42,6 +42,8 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final _brightness = Theme.of(context).brightness;
+
     return Padding(
       padding: const EdgeInsets.all(8),
       child: Row(
@@ -51,8 +53,10 @@ class BottomBar extends StatelessWidget {
           (int index) {
             final _selectedColor = items[index].activeColor;
             final _selectedColorWithOpacity = _selectedColor.withOpacity(0.1);
-            final _inactiveColor =
-                items[index].inactiveColor ?? Colors.grey.shade600;
+            final _inactiveColor = items[index].inactiveColor ??
+                (_brightness == Brightness.light
+                    ? const Color(0xFF404040)
+                    : const Color(0xF2FFFFFF));
             final _rightPadding = itemPadding.right;
 
             return TweenAnimationBuilder<double>(
