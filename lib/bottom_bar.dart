@@ -149,24 +149,24 @@ class BottomBarItem {
     this.inactiveColor,
   });
 
-  /// Icon of `BottomBarItem`. 
+  /// Icon of `BottomBarItem`.
   /// This will be the icon shown in each `BottomBarItem`
   final Widget icon;
 
-  /// Title of `BottomBarItem`. 
-  /// This will be the shown next to the icon whenever `BottomBarItem` is 
+  /// Title of `BottomBarItem`.
+  /// This will be the shown next to the icon whenever `BottomBarItem` is
   /// selected
   final Widget title;
 
-  /// Color of `BottomBarItem` during **light mode** when it is selected. 
+  /// Color of `BottomBarItem` during **light mode** when it is selected.
   /// This will be the active color of icon, title, and background
   final Color activeColor;
 
-  /// Color of `BottomBarItem` during **dark mode** when it is selected. 
+  /// Color of `BottomBarItem` during **dark mode** when it is selected.
   /// This will be the active color of icon, title, and background.
   final Color? darkActiveColor;
 
-  /// Color of `BottomBarItem` while it is not selected. 
+  /// Color of `BottomBarItem` while it is not selected.
   /// This will be the inactive color of icon, title, and background.
   final Color? inactiveColor;
 }

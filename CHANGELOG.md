@@ -1,3 +1,7 @@
+## [1.2.0+1] - 29.04.2021
+
+* Improved formatting
+
 ## [1.2.0] - 29.04.2021
 
 * Added support for changing the active color of `BottomBarItem` during dark mode
