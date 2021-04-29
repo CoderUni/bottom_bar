@@ -1,3 +1,8 @@
+## [1.2.0] - 29.04.2021
+
+* Added support for changing the active color of `BottomBarItem` during dark mode
+* Improved documentation in code
+
 ## [1.1.0] - 22.04.2021
 
 * Improved icon visibility in light mode

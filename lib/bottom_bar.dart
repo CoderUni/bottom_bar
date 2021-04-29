@@ -51,12 +51,21 @@ class BottomBar extends StatelessWidget {
         children: List.generate(
           items.length,
           (int index) {
-            final _selectedColor = items[index].activeColor;
+            // Color when BottomBarItem is selected
+            final _selectedColor = _brightness == Brightness.light
+                ? items[index].activeColor
+                : items[index].darkActiveColor ?? items[index].activeColor;
+
+            // Color of Material and InkWell
             final _selectedColorWithOpacity = _selectedColor.withOpacity(0.1);
+
+            // Color of title when BottomBarItem is NOT selected
             final _inactiveColor = items[index].inactiveColor ??
                 (_brightness == Brightness.light
                     ? const Color(0xFF404040)
                     : const Color(0xF2FFFFFF));
+
+            // Right padding of Row that contains icon and title
             final _rightPadding = itemPadding.right;
 
             return TweenAnimationBuilder<double>(
@@ -136,22 +145,28 @@ class BottomBarItem {
     required this.icon,
     required this.title,
     required this.activeColor,
+    this.darkActiveColor,
     this.inactiveColor,
   });
 
-  /// Icon of `BottomBarItem`. This will be the icon shown in each
-  /// `BottomBarItem`
+  /// Icon of `BottomBarItem`. 
+  /// This will be the icon shown in each `BottomBarItem`
   final Widget icon;
 
-  /// Title of `BottomBarItem`. This will be the shown next to the icon whenever
-  /// `BottomBarItem` is selected
+  /// Title of `BottomBarItem`. 
+  /// This will be the shown next to the icon whenever `BottomBarItem` is 
+  /// selected
   final Widget title;
 
-  /// Color of `BottomBarItem` when it is selected. This will be the active
-  /// color of icon, title, and background
+  /// Color of `BottomBarItem` during **light mode** when it is selected. 
+  /// This will be the active color of icon, title, and background
   final Color activeColor;
 
-  /// Color of `BottomBarItem` while it is not selected. This will be the
-  /// inactive color of icon, title, and background
+  /// Color of `BottomBarItem` during **dark mode** when it is selected. 
+  /// This will be the active color of icon, title, and background.
+  final Color? darkActiveColor;
+
+  /// Color of `BottomBarItem` while it is not selected. 
+  /// This will be the inactive color of icon, title, and background.
   final Color? inactiveColor;
 }

@@ -15,7 +15,7 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^1.1.0
+  bottom_bar: ^1.2.0
 ```
 
 # Parameters
@@ -36,7 +36,8 @@ dependencies:
 #### Contains information about the item that [BottomBar](###BottomBar) has to display
 -  `icon` - `Icon` of `BottomBarItem`
 -  `title` - `Title` of `BottomBarItem`
--  `activeColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` when it is selected
+-  `activeColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` during **light mode** when it is selected
+-  `darkActiveColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` during **dark mode** when it is selected
 -  `inactiveColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` when it is **not** selected
 
 # Usage
@@ -84,11 +85,13 @@ import 'package:bottom_bar/bottom_bar.dart';
             icon: Icon(Icons.favorite),
             title: Text('Favorites'),
             activeColor: Colors.red,
+            darkActiveColor: Colors.red.shade400, // Optional
           ),
           BottomBarItem(
             icon: Icon(Icons.person),
             title: Text('Account'),
             activeColor: Colors.greenAccent.shade700,
+            darkActiveColor: Colors.greenAccent.shade400, // Optional
           ),
           BottomBarItem(
             icon: Icon(Icons.settings),
