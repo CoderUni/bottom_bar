@@ -1,3 +1,7 @@
+## [1.2.1] - 22.05.2021
+
+* Added support for adding a `Key` to `BottomBarItem`
+
 ## [1.2.0+1] - 29.04.2021
 
 * Improved formatting

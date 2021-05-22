@@ -51,86 +51,33 @@ class BottomBar extends StatelessWidget {
         children: List.generate(
           items.length,
           (int index) {
-            // Color when BottomBarItem is selected
             final _selectedColor = _brightness == Brightness.light
                 ? items[index].activeColor
                 : items[index].darkActiveColor ?? items[index].activeColor;
 
-            // Color of Material and InkWell
             final _selectedColorWithOpacity = _selectedColor.withOpacity(0.1);
 
-            // Color of title when BottomBarItem is NOT selected
             final _inactiveColor = items[index].inactiveColor ??
                 (_brightness == Brightness.light
                     ? const Color(0xFF404040)
                     : const Color(0xF2FFFFFF));
 
-            // Right padding of Row that contains icon and title
             final _rightPadding = itemPadding.right;
 
-            return TweenAnimationBuilder<double>(
-              tween: Tween(
-                begin: 0,
-                end: index == selectedIndex ? 1 : 0,
-              ),
+            return _BottomBarItemWidget(
+              index: index,
+              isSelected: index == selectedIndex,
+              selectedColor: _selectedColor,
+              selectedColorWithOpacity: _selectedColorWithOpacity,
+              inactiveColor: _inactiveColor,
+              rightPadding: _rightPadding,
               curve: curve,
               duration: duration,
-              builder: (BuildContext context, double value, Widget? child) {
-                return Material(
-                  color: Color.lerp(
-                    _selectedColor.withOpacity(0),
-                    _selectedColorWithOpacity,
-                    value,
-                  ),
-                  shape: const StadiumBorder(),
-                  child: InkWell(
-                    onTap: () => onTap(index),
-                    customBorder: const StadiumBorder(),
-                    focusColor: _selectedColorWithOpacity,
-                    highlightColor: _selectedColorWithOpacity,
-                    splashColor: _selectedColorWithOpacity,
-                    hoverColor: _selectedColorWithOpacity,
-                    child: Padding(
-                      padding: itemPadding -
-                          EdgeInsets.only(right: _rightPadding * value),
-                      child: Row(
-                        children: [
-                          IconTheme(
-                            data: IconThemeData(
-                              color: Color.lerp(
-                                  _inactiveColor, _selectedColor, value),
-                              size: 24,
-                            ),
-                            child: items[index].icon,
-                          ),
-                          ClipRect(
-                            child: SizedBox(
-                              height: 20,
-                              child: Align(
-                                alignment: const Alignment(-0.2, 0),
-                                widthFactor: value,
-                                child: Padding(
-                                  padding: EdgeInsets.only(
-                                    left: _rightPadding / 2,
-                                    right: _rightPadding,
-                                  ),
-                                  child: DefaultTextStyle(
-                                    style: textStyle.copyWith(
-                                      color: Color.lerp(Colors.transparent,
-                                          _selectedColor, value),
-                                    ),
-                                    child: items[index].title,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
+              itemPadding: itemPadding,
+              textStyle: textStyle,
+              icon: items.elementAt(index).icon,
+              title: items.elementAt(index).title,
+              onTap: () => onTap(index),
             );
           },
         ),
@@ -139,15 +86,149 @@ class BottomBar extends StatelessWidget {
   }
 }
 
+class _BottomBarItemWidget extends StatelessWidget {
+  /// Creates a Widget that displays the contents of a `BottomBarItem`
+  const _BottomBarItemWidget(
+      {Key? key,
+      required this.index,
+      required this.isSelected,
+      required this.selectedColor,
+      required this.selectedColorWithOpacity,
+      required this.inactiveColor,
+      required this.rightPadding,
+      required this.curve,
+      required this.duration,
+      required this.itemPadding,
+      required this.textStyle,
+      required this.icon,
+      required this.title,
+      required this.onTap})
+      : super(key: key);
+
+  /// Index of `BottomBarItem`
+  final int index;
+
+  /// Indicates whether `BottomBarItem` is selected or not
+  final bool isSelected;
+
+  /// Color of `BottomBarItem` when it is selected
+  final Color selectedColor;
+
+  /// Color of Material and InkWell
+  final Color selectedColorWithOpacity;
+
+  /// Color of `BottomBarItem` when it is **NOT** selected
+  final Color inactiveColor;
+
+  /// Right padding of Row that contains icon and title
+  final double rightPadding;
+
+  /// Curve of `BottomBarItem` animation
+  final Curve curve;
+
+  /// Duration of `BottomBarItem` animation
+  final Duration duration;
+
+  /// Padding between the background color and
+  /// (`Row` that contains icon and title)
+  final EdgeInsets itemPadding;
+
+  /// `TextStyle` of `BottomBarItem` Title
+  final TextStyle textStyle;
+
+  /// Icon of `BottomBarItem`
+  final Widget icon;
+
+  /// Title of `BottomBarItem`
+  final Widget title;
+
+  /// Fires this callback whenever a `BottomBarItem` is tapped
+  ///
+  /// Use this callback to update the `selectedIndex`
+  final Function() onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return TweenAnimationBuilder<double>(
+      tween: Tween(
+        begin: 0,
+        end: isSelected ? 1 : 0,
+      ),
+      curve: curve,
+      duration: duration,
+      builder: (BuildContext context, double value, Widget? child) {
+        return Material(
+          color: Color.lerp(
+            selectedColor.withOpacity(0),
+            selectedColorWithOpacity,
+            value,
+          ),
+          shape: const StadiumBorder(),
+          child: InkWell(
+            onTap: onTap,
+            customBorder: const StadiumBorder(),
+            focusColor: selectedColorWithOpacity,
+            highlightColor: selectedColorWithOpacity,
+            splashColor: selectedColorWithOpacity,
+            hoverColor: selectedColorWithOpacity,
+            child: Padding(
+              padding:
+                  itemPadding - EdgeInsets.only(right: rightPadding * value),
+              child: Row(
+                children: [
+                  IconTheme(
+                    data: IconThemeData(
+                      color: Color.lerp(inactiveColor, selectedColor, value),
+                      size: 24,
+                    ),
+                    child: icon,
+                  ),
+                  ClipRect(
+                    child: SizedBox(
+                      height: 20,
+                      child: Align(
+                        alignment: const Alignment(-0.2, 0),
+                        widthFactor: value,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: rightPadding / 2,
+                            right: rightPadding,
+                          ),
+                          child: DefaultTextStyle(
+                            style: textStyle.copyWith(
+                              color: Color.lerp(
+                                  Colors.transparent, selectedColor, value),
+                            ),
+                            child: title,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
 class BottomBarItem {
   /// This contains information about the item that `BottomBar` has to display
   BottomBarItem({
+    this.key,
     required this.icon,
     required this.title,
     required this.activeColor,
     this.darkActiveColor,
     this.inactiveColor,
   });
+
+  /// Key of `BottomBarItem`.
+  /// This will be the key of the specific `BottomBarItem` shown in `BottomBar`
+  final Key? key;
 
   /// Icon of `BottomBarItem`.
   /// This will be the icon shown in each `BottomBarItem`
