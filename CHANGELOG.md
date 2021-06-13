@@ -1,3 +1,7 @@
+## [1.2.2] - 13.06.2021
+
+* Fixed key not being assigned to `BottomBarItem`
+
 ## [1.2.1] - 22.05.2021
 
 * Added support for adding a `Key` to `BottomBarItem`

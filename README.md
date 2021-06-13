@@ -15,7 +15,7 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^1.2.1
+  bottom_bar: ^1.2.2
 ```
 
 # Parameters

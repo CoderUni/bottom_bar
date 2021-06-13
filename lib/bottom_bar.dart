@@ -66,6 +66,7 @@ class BottomBar extends StatelessWidget {
 
             return _BottomBarItemWidget(
               index: index,
+              key: items.elementAt(index).key,
               isSelected: index == selectedIndex,
               selectedColor: _selectedColor,
               selectedColorWithOpacity: _selectedColorWithOpacity,
