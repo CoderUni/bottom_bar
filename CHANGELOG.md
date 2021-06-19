@@ -1,3 +1,7 @@
+## [1.2.2+1] - 13.06.2021
+
+* Improved documentation
+
 ## [1.2.2] - 13.06.2021
 
 * Fixed key not being assigned to `BottomBarItem`

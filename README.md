@@ -1,6 +1,11 @@
 # Bottom Bar
 
-Bottom bar helps create an optimized bottom navigation bar with beautiful animations
+Bottom bar helps create an optimized bottom navigation bar with beautiful animations. This package is inspired by `bottom_navy_bar` and has many improvements over it:
+
+- BottomBarItem's width is dynamic and not fixed ([Bottom_bar](https://github.com/CoderUni/bottom_bar/blob/main/assets/preview.gif) vs [bottom_navy_bar](https://github.com/pedromassango/bottom_navy_bar/blob/master/images/navy.gif))
+- Dark Mode Support
+- More optimized ([BottomBarItem](https://github.com/CoderUni/bottom_bar/blob/87cb7e53976e9c27c72d18a4efad2e474255cf8b/lib/bottom_bar.dart#L58) vs [BottomNavyBarItem](https://github.com/pedromassango/bottom_navy_bar/blob/2e88b51a445006d4a0a21b3f0dd22627f1a6e359/lib/bottom_navy_bar.dart#L145))
+- Allows inserting keys for each `BottomBarItem` for widget testing
 
 ![Bottom Bar](https://raw.githubusercontent.com/CoderUni/bottom_bar/main/assets/preview.gif)
 
@@ -15,7 +20,7 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^1.2.2
+  bottom_bar: ^1.2.2+1
 ```
 
 # Parameters
