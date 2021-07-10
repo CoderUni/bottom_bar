@@ -20,7 +20,7 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^1.2.2+1
+  bottom_bar: ^1.2.3+1
 ```
 
 # Parameters
@@ -29,6 +29,7 @@ dependencies:
 #### Creates a `BottomBar` that displays a list of [BottomBarItem](###BottomBarItem)
 
 -  `selectedIndex` - `Index` of selected item
+-  `backgroundColor` - Background Color of `BottomBar`
 -  `curve` - `Curve` of animation
 -  `duration` - `Duration` of animation
 -  `items` - List of [BottomBarItem](###BottomBarItem) to display
