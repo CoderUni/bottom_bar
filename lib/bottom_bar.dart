@@ -10,6 +10,7 @@ class BottomBar extends StatelessWidget {
     required this.selectedIndex,
     this.curve = Curves.easeOutQuint,
     this.duration = const Duration(milliseconds: 750),
+    this.backgroundColor,
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     required this.items,
     required this.onTap,
@@ -24,6 +25,9 @@ class BottomBar extends StatelessWidget {
 
   /// Duration of the animation
   final Duration duration;
+
+  /// Background Color of `BottomBar`
+  final Color? backgroundColor;
 
   /// Padding between the background color and
   /// (`Row` that contains icon and title)
@@ -44,43 +48,46 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final _brightness = Theme.of(context).brightness;
 
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: List.generate(
-          items.length,
-          (int index) {
-            final _selectedColor = _brightness == Brightness.light
-                ? items[index].activeColor
-                : items[index].darkActiveColor ?? items[index].activeColor;
+    return DecoratedBox(
+      decoration: BoxDecoration(color: backgroundColor),
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: List.generate(
+            items.length,
+            (int index) {
+              final _selectedColor = _brightness == Brightness.light
+                  ? items[index].activeColor
+                  : items[index].darkActiveColor ?? items[index].activeColor;
 
-            final _selectedColorWithOpacity = _selectedColor.withOpacity(0.1);
+              final _selectedColorWithOpacity = _selectedColor.withOpacity(0.1);
 
-            final _inactiveColor = items[index].inactiveColor ??
-                (_brightness == Brightness.light
-                    ? const Color(0xFF404040)
-                    : const Color(0xF2FFFFFF));
+              final _inactiveColor = items[index].inactiveColor ??
+                  (_brightness == Brightness.light
+                      ? const Color(0xFF404040)
+                      : const Color(0xF2FFFFFF));
 
-            final _rightPadding = itemPadding.right;
+              final _rightPadding = itemPadding.right;
 
-            return _BottomBarItemWidget(
-              index: index,
-              key: items.elementAt(index).key,
-              isSelected: index == selectedIndex,
-              selectedColor: _selectedColor,
-              selectedColorWithOpacity: _selectedColorWithOpacity,
-              inactiveColor: _inactiveColor,
-              rightPadding: _rightPadding,
-              curve: curve,
-              duration: duration,
-              itemPadding: itemPadding,
-              textStyle: textStyle,
-              icon: items.elementAt(index).icon,
-              title: items.elementAt(index).title,
-              onTap: () => onTap(index),
-            );
-          },
+              return _BottomBarItemWidget(
+                index: index,
+                key: items.elementAt(index).key,
+                isSelected: index == selectedIndex,
+                selectedColor: _selectedColor,
+                selectedColorWithOpacity: _selectedColorWithOpacity,
+                inactiveColor: _inactiveColor,
+                rightPadding: _rightPadding,
+                curve: curve,
+                duration: duration,
+                itemPadding: itemPadding,
+                textStyle: textStyle,
+                icon: items.elementAt(index).icon,
+                title: items.elementAt(index).title,
+                onTap: () => onTap(index),
+              );
+            },
+          ),
         ),
       ),
     );

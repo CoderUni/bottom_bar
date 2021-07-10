@@ -1,3 +1,6 @@
+## [1.2.3] - 10.07.2021
+* Added support for changing background color of entire bottom bar
+
 ## [1.2.2+1] - 13.06.2021
 
 * Improved documentation
