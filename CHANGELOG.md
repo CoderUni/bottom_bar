@@ -1,3 +1,6 @@
+## [1.2.4] - 27.07.2021
+* Added height parameter
+
 ## [1.2.3+1] - 10.07.2021
 * Improved documentation
 

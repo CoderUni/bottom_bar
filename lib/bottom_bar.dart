@@ -10,6 +10,7 @@ class BottomBar extends StatelessWidget {
     required this.selectedIndex,
     this.curve = Curves.easeOutQuint,
     this.duration = const Duration(milliseconds: 750),
+    this.height,
     this.backgroundColor,
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     required this.items,
@@ -25,6 +26,9 @@ class BottomBar extends StatelessWidget {
 
   /// Duration of the animation
   final Duration duration;
+
+  /// Height of `BottomBar`
+  final num? height;
 
   /// Background Color of `BottomBar`
   final Color? backgroundColor;
@@ -48,7 +52,8 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final _brightness = Theme.of(context).brightness;
 
-    return DecoratedBox(
+    return Container(
+      height: height?.toDouble(),
       decoration: BoxDecoration(color: backgroundColor),
       child: Padding(
         padding: const EdgeInsets.all(8),
