@@ -88,6 +88,7 @@ class BottomBar extends StatelessWidget {
                 itemPadding: itemPadding,
                 textStyle: textStyle,
                 icon: items.elementAt(index).icon,
+                inactiveIcon: items.elementAt(index).inactiveIcon,
                 title: items.elementAt(index).title,
                 onTap: () => onTap(index),
               );
@@ -101,22 +102,23 @@ class BottomBar extends StatelessWidget {
 
 class _BottomBarItemWidget extends StatelessWidget {
   /// Creates a Widget that displays the contents of a `BottomBarItem`
-  const _BottomBarItemWidget(
-      {Key? key,
-      required this.index,
-      required this.isSelected,
-      required this.selectedColor,
-      required this.selectedColorWithOpacity,
-      required this.inactiveColor,
-      required this.rightPadding,
-      required this.curve,
-      required this.duration,
-      required this.itemPadding,
-      required this.textStyle,
-      required this.icon,
-      required this.title,
-      required this.onTap})
-      : super(key: key);
+  const _BottomBarItemWidget({
+    Key? key,
+    required this.index,
+    required this.isSelected,
+    required this.selectedColor,
+    required this.selectedColorWithOpacity,
+    required this.inactiveColor,
+    required this.rightPadding,
+    required this.curve,
+    required this.duration,
+    required this.itemPadding,
+    required this.textStyle,
+    required this.icon,
+    this.inactiveIcon,
+    required this.title,
+    required this.onTap,
+  }) : super(key: key);
 
   /// Index of `BottomBarItem`
   final int index;
@@ -151,6 +153,9 @@ class _BottomBarItemWidget extends StatelessWidget {
 
   /// Icon of `BottomBarItem`
   final Widget icon;
+
+  /// Icon to display when the `BottombarItem` is not active
+  final Widget? inactiveIcon;
 
   /// Title of `BottomBarItem`
   final Widget title;
@@ -194,7 +199,7 @@ class _BottomBarItemWidget extends StatelessWidget {
                       color: Color.lerp(inactiveColor, selectedColor, value),
                       size: 24,
                     ),
-                    child: icon,
+                    child: isSelected ? icon : (inactiveIcon ?? icon),
                   ),
                   ClipRect(
                     child: SizedBox(
@@ -233,6 +238,7 @@ class BottomBarItem {
   BottomBarItem({
     this.key,
     required this.icon,
+    this.inactiveIcon,
     required this.title,
     required this.activeColor,
     this.darkActiveColor,
@@ -246,6 +252,10 @@ class BottomBarItem {
   /// Icon of `BottomBarItem`.
   /// This will be the icon shown in each `BottomBarItem`
   final Widget icon;
+
+  /// Icon to display when the `BottombarItem` is not active
+  /// This will be the icon shown in each `BottomBarItem`
+  final Widget? inactiveIcon;
 
   /// Title of `BottomBarItem`.
   /// This will be the shown next to the icon whenever `BottomBarItem` is

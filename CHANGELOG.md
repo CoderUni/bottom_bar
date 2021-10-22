@@ -1,3 +1,6 @@
+## [1.2.5] - 22.10.2021
+* Added inactiveIcon parameter
+
 ## [1.2.4] - 27.07.2021
 * Added height parameter
 

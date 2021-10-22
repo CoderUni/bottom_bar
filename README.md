@@ -20,7 +20,7 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^1.2.4
+  bottom_bar: ^1.2.5
 ```
 
 # Parameters
@@ -42,6 +42,7 @@ dependencies:
 ## BottomBarItem
 #### Contains information about the item that [BottomBar](###BottomBar) has to display
 -  `icon` - `Icon` of `BottomBarItem`
+-  `inactiveIcon`- Icon to display when `BottomBarItem` is not active
 -  `title` - `Title` of `BottomBarItem`
 -  `activeColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` during **light mode** when it is selected
 -  `darkActiveColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` during **dark mode** when it is selected
