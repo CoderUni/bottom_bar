@@ -1,3 +1,6 @@
+## [1.3.0] - 27.12.2021
+* Added showActiveBackgroundColor parameter
+
 ## [1.2.5] - 22.10.2021
 * Added inactiveIcon parameter
 

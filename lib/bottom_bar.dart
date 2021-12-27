@@ -12,6 +12,7 @@ class BottomBar extends StatelessWidget {
     this.duration = const Duration(milliseconds: 750),
     this.height,
     this.backgroundColor,
+    this.showActiveBackgroundColor = true,
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     required this.items,
     required this.onTap,
@@ -32,6 +33,10 @@ class BottomBar extends StatelessWidget {
 
   /// Background Color of `BottomBar`
   final Color? backgroundColor;
+
+  /// Shows the background color of `BottomBarItem` when it is active
+  /// and when this is set to true
+  final bool showActiveBackgroundColor;
 
   /// Padding between the background color and
   /// (`Row` that contains icon and title)
@@ -81,6 +86,7 @@ class BottomBar extends StatelessWidget {
                 isSelected: index == selectedIndex,
                 selectedColor: _selectedColor,
                 selectedColorWithOpacity: _selectedColorWithOpacity,
+                showActiveBackgroundColor: showActiveBackgroundColor,
                 inactiveColor: _inactiveColor,
                 rightPadding: _rightPadding,
                 curve: curve,
@@ -108,6 +114,7 @@ class _BottomBarItemWidget extends StatelessWidget {
     required this.isSelected,
     required this.selectedColor,
     required this.selectedColorWithOpacity,
+    required this.showActiveBackgroundColor,
     required this.inactiveColor,
     required this.rightPadding,
     required this.curve,
@@ -131,6 +138,10 @@ class _BottomBarItemWidget extends StatelessWidget {
 
   /// Color of Material and InkWell
   final Color selectedColorWithOpacity;
+
+  /// Shows the background color of `BottomBarItem` when it is active
+  /// and when this is set to true
+  final bool showActiveBackgroundColor;
 
   /// Color of `BottomBarItem` when it is **NOT** selected
   final Color inactiveColor;
@@ -176,11 +187,13 @@ class _BottomBarItemWidget extends StatelessWidget {
       duration: duration,
       builder: (BuildContext context, double value, Widget? child) {
         return Material(
-          color: Color.lerp(
-            selectedColor.withOpacity(0),
-            selectedColorWithOpacity,
-            value,
-          ),
+          color: showActiveBackgroundColor
+              ? Color.lerp(
+                  selectedColor.withOpacity(0),
+                  selectedColorWithOpacity,
+                  value,
+                )
+              : Colors.transparent,
           shape: const StadiumBorder(),
           child: InkWell(
             onTap: onTap,

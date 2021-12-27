@@ -45,6 +45,7 @@ class _HomeState extends State<Home> {
       ),
       bottomNavigationBar: BottomBar(
         selectedIndex: _currentPage,
+        showActiveBackgroundColor: true,
         onTap: (int index) {
           _pageController.jumpToPage(index);
           setState(() => _currentPage = index);
