@@ -1,3 +1,6 @@
+## [1.3.0+1] - 27.12.2021
+* Added showActiveBackgroundColor parameter docs
+
 ## [1.3.0] - 27.12.2021
 * Added showActiveBackgroundColor parameter
 
