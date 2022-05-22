@@ -2,10 +2,14 @@ library bottom_bar;
 
 import 'package:flutter/material.dart';
 
+/// {@template bottom_bar}
+/// Creates a `BottomBar` that displays a list of `BottomBarItem`
+///
+/// Animations will play once a `BottomBarItem` is clicked
+/// {@endtemplate}
 class BottomBar extends StatelessWidget {
-  /// Creates a `BottomBar` that displays a list of `BottomBarItem` along with
-  /// added animations whenever a `BottomBarItem` is clicked
-  BottomBar({
+  /// {@macro bottom_bar}
+  const BottomBar({
     Key? key,
     required this.selectedIndex,
     this.curve = Curves.easeOutQuint,
@@ -13,16 +17,17 @@ class BottomBar extends StatelessWidget {
     this.height,
     this.backgroundColor,
     this.showActiveBackgroundColor = true,
+    this.border = const StadiumBorder(),
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     required this.items,
     required this.onTap,
     this.textStyle = const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
   }) : super(key: key);
 
-  /// Current index that is selected
+  /// Index of selected item
   final int selectedIndex;
 
-  /// Animation Curve of animation
+  /// Curve of animation
   final Curve curve;
 
   /// Duration of the animation
@@ -31,21 +36,23 @@ class BottomBar extends StatelessWidget {
   /// Height of `BottomBar`
   final num? height;
 
-  /// Background Color of `BottomBar`
+  /// Background color of `BottomBar`
   final Color? backgroundColor;
 
-  /// Shows the background color of `BottomBarItem` when it is active
-  /// and when this is set to true
+  /// Shows the background color of a selected `BottomBarItem` if set to true
   final bool showActiveBackgroundColor;
 
-  /// Padding between the background color and
-  /// (`Row` that contains icon and title)
+  /// [ShapeBorder] of the `BottomBarItem's` background color
+  final ShapeBorder border;
+
+  /// Padding between the background color and the
+  /// `Row` that contains the icon and title
   final EdgeInsets itemPadding;
 
   /// List of `BottomBarItems` to display
   final List<BottomBarItem> items;
 
-  /// Fires this callback whenever a `BottomBarItem` is tapped
+  /// Fires this callback when `BottomBarItem` is tapped
   ///
   /// Use this callback to update the `selectedIndex`
   final ValueChanged<int> onTap;
@@ -55,40 +62,42 @@ class BottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _brightness = Theme.of(context).brightness;
-
+    final brightness = Theme.of(context).brightness;
     return Container(
       height: height?.toDouble(),
       decoration: BoxDecoration(color: backgroundColor),
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(
             items.length,
             (int index) {
-              final _selectedColor = _brightness == Brightness.light
-                  ? items[index].activeColor
-                  : items[index].darkActiveColor ?? items[index].activeColor;
+              final bottomBarItem = items.elementAt(index);
+              final backgroundColor = bottomBarItem.activeColor
+                  .withOpacity(bottomBarItem.backgroundColorOpacity.toDouble());
 
-              final _selectedColorWithOpacity = _selectedColor.withOpacity(0.1);
+              final Color activeIconColor =
+                  bottomBarItem.activeIconColor ?? bottomBarItem.activeColor;
+              final Color activeTitleColor =
+                  bottomBarItem.activeTitleColor ?? bottomBarItem.activeColor;
 
-              final _inactiveColor = items[index].inactiveColor ??
-                  (_brightness == Brightness.light
-                      ? const Color(0xFF404040)
+              final inactiveColor = items[index].inactiveColor ??
+                  (brightness == Brightness.light
+                      ? Color.fromARGB(255, 80, 80, 80)
                       : const Color(0xF2FFFFFF));
-
-              final _rightPadding = itemPadding.right;
 
               return _BottomBarItemWidget(
                 index: index,
                 key: items.elementAt(index).key,
                 isSelected: index == selectedIndex,
-                selectedColor: _selectedColor,
-                selectedColorWithOpacity: _selectedColorWithOpacity,
+                activeBackgroundColor: backgroundColor,
+                activeIconColor: activeIconColor,
+                activeTitleColor: activeTitleColor,
                 showActiveBackgroundColor: showActiveBackgroundColor,
-                inactiveColor: _inactiveColor,
-                rightPadding: _rightPadding,
+                border: border,
+                inactiveColor: inactiveColor,
+                rightPadding: itemPadding.right,
                 curve: curve,
                 duration: duration,
                 itemPadding: itemPadding,
@@ -112,9 +121,11 @@ class _BottomBarItemWidget extends StatelessWidget {
     Key? key,
     required this.index,
     required this.isSelected,
-    required this.selectedColor,
-    required this.selectedColorWithOpacity,
+    required this.activeBackgroundColor,
+    required this.activeIconColor,
+    required this.activeTitleColor,
     required this.showActiveBackgroundColor,
+    required this.border,
     required this.inactiveColor,
     required this.rightPadding,
     required this.curve,
@@ -127,53 +138,22 @@ class _BottomBarItemWidget extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
 
-  /// Index of `BottomBarItem`
   final int index;
-
-  /// Indicates whether `BottomBarItem` is selected or not
   final bool isSelected;
-
-  /// Color of `BottomBarItem` when it is selected
-  final Color selectedColor;
-
-  /// Color of Material and InkWell
-  final Color selectedColorWithOpacity;
-
-  /// Shows the background color of `BottomBarItem` when it is active
-  /// and when this is set to true
+  final Color activeBackgroundColor;
+  final Color? activeIconColor;
+  final Color? activeTitleColor;
   final bool showActiveBackgroundColor;
-
-  /// Color of `BottomBarItem` when it is **NOT** selected
+  final ShapeBorder border;
   final Color inactiveColor;
-
-  /// Right padding of Row that contains icon and title
   final double rightPadding;
-
-  /// Curve of `BottomBarItem` animation
   final Curve curve;
-
-  /// Duration of `BottomBarItem` animation
   final Duration duration;
-
-  /// Padding between the background color and
-  /// (`Row` that contains icon and title)
   final EdgeInsets itemPadding;
-
-  /// `TextStyle` of `BottomBarItem` Title
   final TextStyle textStyle;
-
-  /// Icon of `BottomBarItem`
   final Widget icon;
-
-  /// Icon to display when the `BottombarItem` is not active
   final Widget? inactiveIcon;
-
-  /// Title of `BottomBarItem`
   final Widget title;
-
-  /// Fires this callback whenever a `BottomBarItem` is tapped
-  ///
-  /// Use this callback to update the `selectedIndex`
   final Function() onTap;
 
   @override
@@ -189,19 +169,19 @@ class _BottomBarItemWidget extends StatelessWidget {
         return Material(
           color: showActiveBackgroundColor
               ? Color.lerp(
-                  selectedColor.withOpacity(0),
-                  selectedColorWithOpacity,
+                  activeBackgroundColor.withOpacity(0),
+                  activeBackgroundColor,
                   value,
                 )
               : Colors.transparent,
-          shape: const StadiumBorder(),
+          shape: border,
           child: InkWell(
             onTap: onTap,
-            customBorder: const StadiumBorder(),
-            focusColor: selectedColorWithOpacity,
-            highlightColor: selectedColorWithOpacity,
-            splashColor: selectedColorWithOpacity,
-            hoverColor: selectedColorWithOpacity,
+            customBorder: border,
+            focusColor: activeBackgroundColor,
+            highlightColor: activeBackgroundColor,
+            splashColor: activeBackgroundColor,
+            hoverColor: activeBackgroundColor,
             child: Padding(
               padding:
                   itemPadding - EdgeInsets.only(right: rightPadding * value),
@@ -209,7 +189,7 @@ class _BottomBarItemWidget extends StatelessWidget {
                 children: [
                   IconTheme(
                     data: IconThemeData(
-                      color: Color.lerp(inactiveColor, selectedColor, value),
+                      color: Color.lerp(inactiveColor, activeIconColor, value),
                       size: 24,
                     ),
                     child: isSelected ? icon : (inactiveIcon ?? icon),
@@ -228,7 +208,10 @@ class _BottomBarItemWidget extends StatelessWidget {
                           child: DefaultTextStyle(
                             style: textStyle.copyWith(
                               color: Color.lerp(
-                                  Colors.transparent, selectedColor, value),
+                                Colors.transparent,
+                                activeTitleColor,
+                                value,
+                              ),
                             ),
                             child: title,
                           ),
@@ -246,44 +229,63 @@ class _BottomBarItemWidget extends StatelessWidget {
   }
 }
 
+/// {@template bottom_bar_item}
+/// This contains information about the item that `BottomBar` has to display
+/// {@endtemplate}
 class BottomBarItem {
-  /// This contains information about the item that `BottomBar` has to display
-  BottomBarItem({
+  ///{@macro bottom_bar_item}
+  const BottomBarItem({
     this.key,
     required this.icon,
     this.inactiveIcon,
     required this.title,
     required this.activeColor,
-    this.darkActiveColor,
+    this.backgroundColorOpacity = 0.15,
     this.inactiveColor,
+    this.activeIconColor,
+    this.activeTitleColor,
   });
 
-  /// Key of `BottomBarItem`.
-  /// This will be the key of the specific `BottomBarItem` shown in `BottomBar`
+  /// Key of `BottomBarItem`
+  ///
+  /// This will be the key of the specific `BottomBarItem` shown in `BottomBar`.
   final Key? key;
 
-  /// Icon of `BottomBarItem`.
-  /// This will be the icon shown in each `BottomBarItem`
+  /// Icon of `BottomBarItem`
+  ///
+  /// This will be the icon shown in each `BottomBarItem`.
   final Widget icon;
 
   /// Icon to display when the `BottombarItem` is not active
-  /// This will be the icon shown in each `BottomBarItem`
+  ///
+  /// This will be the icon shown in each `BottomBarItem`.
   final Widget? inactiveIcon;
 
-  /// Title of `BottomBarItem`.
+  /// Title of `BottomBarItem` (Typically a Text widget)
+  ///
   /// This will be the shown next to the icon whenever `BottomBarItem` is
-  /// selected
+  /// selected.
   final Widget title;
 
-  /// Color of `BottomBarItem` during **light mode** when it is selected.
-  /// This will be the active color of icon, title, and background
+  /// Color of `BottomBarItem` when it is selected.
+  ///
+  /// This will be the active color of the background
+  ///
+  /// This can also be the active color of the icon and title if
+  /// [activeIconColor] and [activeTitleColor] are null
   final Color activeColor;
 
-  /// Color of `BottomBarItem` during **dark mode** when it is selected.
-  /// This will be the active color of icon, title, and background.
-  final Color? darkActiveColor;
+  /// Opacity of the `BottomBarItem` active color
+  final num backgroundColorOpacity;
 
   /// Color of `BottomBarItem` while it is not selected.
+  ///
   /// This will be the inactive color of icon, title, and background.
   final Color? inactiveColor;
+
+  /// Color of a selected `BottomBarItem` icon
+  final Color? activeIconColor;
+
+  /// Color of a selected `BottomBarItem` title
+  final Color? activeTitleColor;
 }

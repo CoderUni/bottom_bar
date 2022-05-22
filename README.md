@@ -1,11 +1,6 @@
 # Bottom Bar
 
-Bottom bar helps create an optimized bottom navigation bar with beautiful animations. This package is inspired by `bottom_navy_bar` and has many improvements over it:
-
-- BottomBarItem's width is dynamic and not fixed ([Bottom_bar](https://github.com/CoderUni/bottom_bar/blob/main/assets/preview.gif) vs [bottom_navy_bar](https://github.com/pedromassango/bottom_navy_bar/blob/master/images/navy.gif))
-- Dark Mode Support
-- More optimized ([BottomBarItem](https://github.com/CoderUni/bottom_bar/blob/87cb7e53976e9c27c72d18a4efad2e474255cf8b/lib/bottom_bar.dart#L58) vs [BottomNavyBarItem](https://github.com/pedromassango/bottom_navy_bar/blob/2e88b51a445006d4a0a21b3f0dd22627f1a6e359/lib/bottom_navy_bar.dart#L145))
-- Allows inserting keys for each `BottomBarItem` for widget testing
+Bottom bar helps create an optimized bottom navigation bar with beautiful animations.
 
 ![Bottom Bar](https://raw.githubusercontent.com/CoderUni/bottom_bar/main/assets/preview.gif)
 
@@ -20,34 +15,51 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^1.3.0+1
+  bottom_bar: ^2.0.0
 ```
+
+# Breaking Changes
+- `darkActiveColor` is removed to simplify the api. Instead, use [PlatformBrightness](https://stackoverflow.com/a/56307575) to check dark mode and adjust the color accordingly
 
 # Parameters
 
 ## BottomBar
-#### Creates a `BottomBar` that displays a list of [BottomBarItem](###BottomBarItem)
+#### Creates a `BottomBar` that displays a list of [BottomBarItem](##BottomBarItem)
 
--  `selectedIndex` - `Index` of selected item
--  `backgroundColor` - Background Color of `BottomBar`
--  `showActiveBackgroundColor` - Shows the background color of `BottomBarItem` when it is active and when this is set to true
--  `curve` - `Curve` of animation
--  `duration` - `Duration` of animation
--  `height` - Height of `BottomBar`
--  `items` - List of [BottomBarItem](###BottomBarItem) to display
--  `itemPadding` - `Padding` between the background color and (`Row` that contains icon and title)
--  `onTap` - Fires whenever a `BottomBarItem` is tapped
--  `textStyle` - `TextStyle` of `title` widget (Only applied when widget is `Text`)
+</br>
+
+### Required:
+-  selectedIndex - Index of selected item
+-  items - List of [BottomBarItem](##BottomBarItem) to display
+-  onTap - Fires when a [BottomBarItem](##BottomBarItem) is tapped
+
+### Optional:
+-  backgroundColor - Background Color of `BottomBar`
+-  height - Height of `BottomBar`
+-  curve - `Curve` of animation
+-  duration - `Duration` of animation
+-  border - Border of [BottomBarItem](##BottomBarItem)'s background color
+-  itemPadding - `Padding` of [BottomBarItem](##BottomBarItem)'s background color
+-  textStyle - `TextStyle` of title widget
+-  showActiveBackgroundColor - Shows the background color of a selected [BottomBarItem](##BottomBarItem) if set to true
 
  
 ## BottomBarItem
-#### Contains information about the item that [BottomBar](###BottomBar) has to display
--  `icon` - `Icon` of `BottomBarItem`
--  `inactiveIcon`- Icon to display when `BottomBarItem` is not active
--  `title` - `Title` of `BottomBarItem`
--  `activeColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` during **light mode** when it is selected
--  `darkActiveColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` during **dark mode** when it is selected
--  `inactiveColor` - `Color` of `icon`, `title`, and `background` of `BottomBarItem` when it is **not** selected
+#### Contains information about the item that [BottomBar](##BottomBar) has to display
+
+</br>
+
+### Required:
+-  icon - `Icon` of `BottomBarItem`
+-  title - Title of `BottomBarItem` (Typically a Text widget)
+-  activeColor - Primary color of a selected `BottomBarItem`
+
+### Optional:
+-  activeIconColor - Icon color of a selected `BottomBarItem`
+-  activeTitleColor - Text color of a selected `BottomBarItem`
+-  backgroundColorOpacity - Opacity of a selected `BottomBarItem` background color (Defaults to 15%)
+-  inactiveIcon- Icon to display when `BottomBarItem` is not active
+-  inactiveColor - Primary color of `BottomBarItem` when it is **NOT** selected
 
 # Usage
 
@@ -94,13 +106,11 @@ import 'package:bottom_bar/bottom_bar.dart';
             icon: Icon(Icons.favorite),
             title: Text('Favorites'),
             activeColor: Colors.red,
-            darkActiveColor: Colors.red.shade400, // Optional
           ),
           BottomBarItem(
             icon: Icon(Icons.person),
             title: Text('Account'),
             activeColor: Colors.greenAccent.shade700,
-            darkActiveColor: Colors.greenAccent.shade400, // Optional
           ),
           BottomBarItem(
             icon: Icon(Icons.settings),
@@ -112,6 +122,9 @@ import 'package:bottom_bar/bottom_bar.dart';
     );
   }
 ```
+
+# FAQ
+### 
 
 # Community Support
 

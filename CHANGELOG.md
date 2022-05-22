@@ -1,3 +1,8 @@
+## [2.0.0] - 22.05.2022
+* **Breaking Change:** darkActiveColor is removed to simplify the api. Instead, use [PlatformBrightness](https://stackoverflow.com/a/56307575) to check dark mode and adjust the color accordingly
+* Added option to individually control the color of icon and title
+* Added option to change the border of an active `BottomBarItem`'s background color
+
 ## [1.3.0+1] - 27.12.2021
 * Added showActiveBackgroundColor parameter docs
 
