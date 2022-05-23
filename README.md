@@ -6,9 +6,10 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 
 # Content
 
-- [Installation](#Installation)
-- [Parameters](#Parameters)
+- [Installation](#installation)
+- [Parameters](#parameters)
 - [Take Note](#take-note)
+- [FAQ](#faq)
 - [Community Support](#community-support)
 
 # Installation
@@ -24,30 +25,26 @@ dependencies:
 # Parameters
 
 ## BottomBar
-#### Creates a `BottomBar` that displays a list of [BottomBarItem](##BottomBarItem)
-
-</br>
+#### Creates a `BottomBar` that displays a list of [BottomBarItem](#BottomBarItem)
 
 ### Required:
 -  selectedIndex - Index of selected item
--  items - List of [BottomBarItem](##BottomBarItem) to display
--  onTap - Fires when a [BottomBarItem](##BottomBarItem) is tapped
+-  items - List of [BottomBarItem](#BottomBarItem) to display
+-  onTap - Fires when a [BottomBarItem](#BottomBarItem) is tapped
 
 ### Optional:
 -  backgroundColor - Background Color of `BottomBar`
 -  height - Height of `BottomBar`
 -  curve - `Curve` of animation
 -  duration - `Duration` of animation
--  border - Border of [BottomBarItem](##BottomBarItem)'s background color
--  itemPadding - `Padding` of [BottomBarItem](##BottomBarItem)'s background color
+-  border - Border of [BottomBarItem](#BottomBarItem)'s background color
+-  itemPadding - `Padding` of [BottomBarItem](#BottomBarItem)'s background color
 -  textStyle - `TextStyle` of title widget
--  showActiveBackgroundColor - Shows the background color of a selected [BottomBarItem](##BottomBarItem) if set to true
+-  showActiveBackgroundColor - Shows the background color of a selected [BottomBarItem](#BottomBarItem) if set to true
 
  
 ## BottomBarItem
-#### Contains information about the item that [BottomBar](##BottomBar) has to display
-
-</br>
+#### Contains information about the item that [BottomBar](#BottomBar) has to display
 
 ### Required:
 -  icon - `Icon` of `BottomBarItem`
@@ -124,7 +121,21 @@ import 'package:bottom_bar/bottom_bar.dart';
 ```
 
 # FAQ
-### 
+### My phone's notch is overlapping with BottomBar. How do I fix this?
+- Simply wrap BottomBar with a SafeArea widget.
+
+### How do I change the overall color of BottomBarItem when in dark mode?
+- You can use [PlatformBrightness](https://stackoverflow.com/a/56307575) to check dark mode and adjust the color accordingly.
+```dart
+  @override
+  Widget build(BuildContext context) {
+    bool isDarkMode = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+    BottomBarItem(
+      activeColor: isDarkMode ? Colors.orange : Colors.blue, // Is dark mode true? (Yes -> Colors.orange | No -> Colors.blue)
+    ),
+  }
+```
 
 # Community Support
 
