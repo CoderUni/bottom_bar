@@ -15,6 +15,7 @@ class BottomBar extends StatelessWidget {
     this.curve = Curves.easeOutQuint,
     this.duration = const Duration(milliseconds: 750),
     this.height,
+    this.padding = const EdgeInsets.all(10),
     this.backgroundColor,
     this.showActiveBackgroundColor = true,
     this.border = const StadiumBorder(),
@@ -35,6 +36,9 @@ class BottomBar extends StatelessWidget {
 
   /// Height of `BottomBar`
   final num? height;
+
+  /// Padding of `BottomBar`
+  final EdgeInsets padding;
 
   /// Background color of `BottomBar`
   final Color? backgroundColor;
@@ -67,7 +71,7 @@ class BottomBar extends StatelessWidget {
       height: height?.toDouble(),
       decoration: BoxDecoration(color: backgroundColor),
       child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: padding,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: List.generate(

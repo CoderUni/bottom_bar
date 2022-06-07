@@ -1,3 +1,6 @@
+## [2.0.1] - 07.06.2022
+* Added option to change BottomBar padding
+
 ## [2.0.0] - 22.05.2022
 * **Breaking Change:** darkActiveColor is removed to simplify the api. Instead, use [PlatformBrightness](https://stackoverflow.com/a/56307575) to check dark mode and adjust the color accordingly
 * Added option to individually control the color of icon and title
