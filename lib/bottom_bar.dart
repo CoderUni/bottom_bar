@@ -157,7 +157,7 @@ class _BottomBarItemWidget extends StatelessWidget {
   final TextStyle textStyle;
   final Widget icon;
   final Widget? inactiveIcon;
-  final Widget title;
+  final Widget? title;
   final Function() onTap;
 
   @override
@@ -188,7 +188,7 @@ class _BottomBarItemWidget extends StatelessWidget {
             hoverColor: activeBackgroundColor,
             child: Padding(
               padding:
-                  itemPadding - EdgeInsets.only(right: rightPadding * value),
+                  itemPadding - (title==null ? const EdgeInsets.only() : EdgeInsets.only(right: rightPadding * value)),
               child: Row(
                 children: [
                   IconTheme(
@@ -198,6 +198,7 @@ class _BottomBarItemWidget extends StatelessWidget {
                     ),
                     child: isSelected ? icon : (inactiveIcon ?? icon),
                   ),
+                  if(title != null)
                   ClipRect(
                     child: SizedBox(
                       height: 20,
@@ -217,7 +218,7 @@ class _BottomBarItemWidget extends StatelessWidget {
                                 value,
                               ),
                             ),
-                            child: title,
+                            child: title!,
                           ),
                         ),
                       ),
@@ -242,7 +243,7 @@ class BottomBarItem {
     this.key,
     required this.icon,
     this.inactiveIcon,
-    required this.title,
+    this.title,
     required this.activeColor,
     this.backgroundColorOpacity = 0.15,
     this.inactiveColor,
@@ -269,7 +270,7 @@ class BottomBarItem {
   ///
   /// This will be the shown next to the icon whenever `BottomBarItem` is
   /// selected.
-  final Widget title;
+  final Widget? title;
 
   /// Color of `BottomBarItem` when it is selected.
   ///
