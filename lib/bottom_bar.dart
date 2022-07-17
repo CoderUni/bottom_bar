@@ -187,8 +187,10 @@ class _BottomBarItemWidget extends StatelessWidget {
             splashColor: activeBackgroundColor,
             hoverColor: activeBackgroundColor,
             child: Padding(
-              padding:
-                  itemPadding - (title==null ? const EdgeInsets.only() : EdgeInsets.only(right: rightPadding * value)),
+              padding: itemPadding -
+                  (title == null
+                      ? EdgeInsets.zero
+                      : EdgeInsets.only(right: rightPadding * value)),
               child: Row(
                 children: [
                   IconTheme(
@@ -198,32 +200,32 @@ class _BottomBarItemWidget extends StatelessWidget {
                     ),
                     child: isSelected ? icon : (inactiveIcon ?? icon),
                   ),
-                  if(title != null)
-                  ClipRect(
-                    child: SizedBox(
-                      height: 20,
-                      child: Align(
-                        alignment: const Alignment(-0.2, 0),
-                        widthFactor: value,
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            left: rightPadding / 2,
-                            right: rightPadding,
-                          ),
-                          child: DefaultTextStyle(
-                            style: textStyle.copyWith(
-                              color: Color.lerp(
-                                Colors.transparent,
-                                activeTitleColor,
-                                value,
-                              ),
+                  if (title != null)
+                    ClipRect(
+                      child: SizedBox(
+                        height: 20,
+                        child: Align(
+                          alignment: const Alignment(-0.2, 0),
+                          widthFactor: value,
+                          child: Padding(
+                            padding: EdgeInsets.only(
+                              left: rightPadding / 2,
+                              right: rightPadding,
                             ),
-                            child: title!,
+                            child: DefaultTextStyle(
+                              style: textStyle.copyWith(
+                                color: Color.lerp(
+                                  Colors.transparent,
+                                  activeTitleColor,
+                                  value,
+                                ),
+                              ),
+                              child: title!,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
                 ],
               ),
             ),

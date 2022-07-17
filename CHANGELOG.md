@@ -1,3 +1,7 @@
+## [2.0.2] - 17.07.2022
+* Title widget can now be null
+* Big thanks to rrkas for the PR
+
 ## [2.0.1] - 07.06.2022
 * Added option to change BottomBar padding
 
