@@ -16,6 +16,7 @@ class BottomBar extends StatelessWidget {
     this.duration = const Duration(milliseconds: 750),
     this.height,
     this.padding = const EdgeInsets.all(10),
+    this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     this.backgroundColor,
     this.showActiveBackgroundColor = true,
     this.border = const StadiumBorder(),
@@ -39,6 +40,9 @@ class BottomBar extends StatelessWidget {
 
   /// Padding of `BottomBar`
   final EdgeInsets padding;
+
+  /// Describes how `BottomBarItem`s are horizontally laid out
+  final MainAxisAlignment mainAxisAlignment;
 
   /// Background color of `BottomBar`
   final Color? backgroundColor;
@@ -73,7 +77,7 @@ class BottomBar extends StatelessWidget {
       child: Padding(
         padding: padding,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: mainAxisAlignment,
           children: List.generate(
             items.length,
             (int index) {

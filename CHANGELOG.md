@@ -1,3 +1,6 @@
+## [2.0.3] - 26.11.2022
+* Added option to change [BottomBar] mainAxisAlignment
+
 ## [2.0.2] - 17.07.2022
 * Title widget can now be null
 * Big thanks to rrkas for the PR
