@@ -16,50 +16,11 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^2.0.4
+  bottom_bar: ^2.0.4+1
 ```
 
 # Breaking Changes
 - `darkActiveColor` is removed to simplify the api. Instead, use [PlatformBrightness](https://stackoverflow.com/a/56307575) to check dark mode and adjust the color accordingly
-
-# Parameters
-
-## BottomBar
-#### Creates a `BottomBar` that displays a list of [BottomBarItem](#BottomBarItem)
-
-### Required:
--  selectedIndex - Index of selected item
--  items - List of [BottomBarItem](#BottomBarItem) to display
--  onTap - Fires when a [BottomBarItem](#BottomBarItem) is tapped
-
-### Optional:
--  backgroundColor - Background Color of `BottomBar`
--  height - Height of `BottomBar`
--  padding - Padding of `BottomBar` container
--  mainAxisAlignment - Describes how [BottomBarItems](#BottomBarItem) are horizontally laid out
--  curve - `Curve` of animation
--  duration - `Duration` of animation
--  border - Border of [BottomBarItem](#BottomBarItem)'s background color
--  boxShadow - `BoxShadow` of `BottomBar`
--  itemPadding - `Padding` of [BottomBarItem](#BottomBarItem)'s background color
--  textStyle - `TextStyle` of title widget
--  showActiveBackgroundColor - Shows the background color of a selected [BottomBarItem](#BottomBarItem) if set to true
-
- 
-## BottomBarItem
-#### Contains information about the item that [BottomBar](#BottomBar) has to display
-
-### Required:
--  icon - `Icon` of `BottomBarItem`
--  title - Title of `BottomBarItem` (Typically a Text widget)
--  activeColor - Primary color of a selected `BottomBarItem`
-
-### Optional:
--  activeIconColor - Icon color of a selected `BottomBarItem`
--  activeTitleColor - Text color of a selected `BottomBarItem`
--  backgroundColorOpacity - Opacity of a selected `BottomBarItem` background color (Defaults to 15%)
--  inactiveIcon- Icon to display when `BottomBarItem` is not active
--  inactiveColor - Primary color of `BottomBarItem` when it is **NOT** selected
 
 # Usage
 
@@ -122,6 +83,45 @@ import 'package:bottom_bar/bottom_bar.dart';
     );
   }
 ```
+
+# Parameters
+
+## BottomBar
+#### Creates a `BottomBar` that displays a list of [BottomBarItem](#BottomBarItem)
+
+### Required:
+-  selectedIndex - Index of selected item
+-  items - List of [BottomBarItem](#BottomBarItem) to display
+-  onTap - Fires when a [BottomBarItem](#BottomBarItem) is tapped
+
+### Optional:
+-  backgroundColor - Background Color of `BottomBar`
+-  height - Height of `BottomBar`
+-  padding - Padding of `BottomBar` container
+-  mainAxisAlignment - Describes how [BottomBarItems](#BottomBarItem) are horizontally laid out
+-  curve - `Curve` of animation
+-  duration - `Duration` of animation
+-  border - Border of [BottomBarItem](#BottomBarItem)'s background color
+-  boxShadow - `BoxShadow` of `BottomBar`
+-  itemPadding - `Padding` of [BottomBarItem](#BottomBarItem)'s background color
+-  textStyle - `TextStyle` of title widget
+-  showActiveBackgroundColor - Shows the background color of a selected [BottomBarItem](#BottomBarItem) if set to true
+
+ 
+## BottomBarItem
+#### Contains information about the item that [BottomBar](#BottomBar) has to display
+
+### Required:
+-  icon - `Icon` of `BottomBarItem`
+-  title - Title of `BottomBarItem` (Typically a Text widget)
+-  activeColor - Primary color of a selected `BottomBarItem`
+
+### Optional:
+-  activeIconColor - Icon color of a selected `BottomBarItem`
+-  activeTitleColor - Text color of a selected `BottomBarItem`
+-  backgroundColorOpacity - Opacity of a selected `BottomBarItem` background color (Defaults to 15%)
+-  inactiveIcon- Icon to display when `BottomBarItem` is not active
+-  inactiveColor - Primary color of `BottomBarItem` when it is **NOT** selected
 
 # FAQ
 ### My phone's notch is overlapping with BottomBar. How do I fix this?
