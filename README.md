@@ -16,7 +16,7 @@ Bottom bar helps create an optimized bottom navigation bar with beautiful animat
 Add `bottom_bar` to pubspec.yaml
 ```yaml
 dependencies:
-  bottom_bar: ^2.0.3
+  bottom_bar: ^2.0.4
 ```
 
 # Breaking Changes
@@ -40,6 +40,7 @@ dependencies:
 -  curve - `Curve` of animation
 -  duration - `Duration` of animation
 -  border - Border of [BottomBarItem](#BottomBarItem)'s background color
+-  boxShadow - `BoxShadow` of `BottomBar`
 -  itemPadding - `Padding` of [BottomBarItem](#BottomBarItem)'s background color
 -  textStyle - `TextStyle` of title widget
 -  showActiveBackgroundColor - Shows the background color of a selected [BottomBarItem](#BottomBarItem) if set to true

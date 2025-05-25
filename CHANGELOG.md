@@ -1,3 +1,7 @@
+## [2.0.4] - 10.12.2024
+* Add option to place [boxShadow]s
+* Updated deprecated [withOpacity] method
+
 ## [2.0.3] - 26.11.2022
 * Added option to change [BottomBar] mainAxisAlignment
 

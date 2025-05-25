@@ -20,6 +20,7 @@ class BottomBar extends StatelessWidget {
     this.backgroundColor,
     this.showActiveBackgroundColor = true,
     this.border = const StadiumBorder(),
+    this.boxShadow,
     this.itemPadding = const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
     required this.items,
     required this.onTap,
@@ -53,6 +54,9 @@ class BottomBar extends StatelessWidget {
   /// [ShapeBorder] of the `BottomBarItem's` background color
   final ShapeBorder border;
 
+  /// [BoxShadow] of `BottomBar`
+  final List<BoxShadow>? boxShadow;
+
   /// Padding between the background color and the
   /// `Row` that contains the icon and title
   final EdgeInsets itemPadding;
@@ -73,7 +77,10 @@ class BottomBar extends StatelessWidget {
     final brightness = Theme.of(context).brightness;
     return Container(
       height: height?.toDouble(),
-      decoration: BoxDecoration(color: backgroundColor),
+      decoration: BoxDecoration(
+        color: backgroundColor,
+        boxShadow: boxShadow,
+      ),
       child: Padding(
         padding: padding,
         child: Row(
@@ -82,8 +89,11 @@ class BottomBar extends StatelessWidget {
             items.length,
             (int index) {
               final bottomBarItem = items.elementAt(index);
-              final backgroundColor = bottomBarItem.activeColor
-                  .withOpacity(bottomBarItem.backgroundColorOpacity.toDouble());
+              const alphaScalingFactor = 255 / 100;
+              final backgroundColor = bottomBarItem.activeColor.withAlpha(
+                  (alphaScalingFactor *
+                          bottomBarItem.backgroundColorOpacity.toDouble())
+                      .round());
 
               final Color activeIconColor =
                   bottomBarItem.activeIconColor ?? bottomBarItem.activeColor;
@@ -177,7 +187,7 @@ class _BottomBarItemWidget extends StatelessWidget {
         return Material(
           color: showActiveBackgroundColor
               ? Color.lerp(
-                  activeBackgroundColor.withOpacity(0),
+                  activeBackgroundColor.withAlpha(0),
                   activeBackgroundColor,
                   value,
                 )
