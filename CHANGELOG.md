@@ -1,3 +1,6 @@
+## [2.0.5] - 26.05.2025
+* Fix improperly shown [BottomBarItem] active background color
+
 ## [2.0.4+1] - 26.05.2025
 * Improved documentation
 

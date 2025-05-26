@@ -89,11 +89,11 @@ class BottomBar extends StatelessWidget {
             items.length,
             (int index) {
               final bottomBarItem = items.elementAt(index);
-              const alphaScalingFactor = 255 / 100;
-              final backgroundColor = bottomBarItem.activeColor.withAlpha(
-                  (alphaScalingFactor *
-                          bottomBarItem.backgroundColorOpacity.toDouble())
-                      .round());
+              final alpha =
+                  (255 * (bottomBarItem.backgroundColorOpacity.clamp(0, 1)))
+                      .round();
+              final backgroundColor =
+                  bottomBarItem.activeColor.withAlpha(alpha);
 
               final Color activeIconColor =
                   bottomBarItem.activeIconColor ?? bottomBarItem.activeColor;
